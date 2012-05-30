@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  *
  * @author TheG49
  */
-public interface Program
+public interface Leg
 {
-    public BigDecimal getDomesticSegmentFee();
+    public BigDecimal getNumberOfPassengers();
 }
