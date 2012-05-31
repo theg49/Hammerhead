@@ -6,6 +6,7 @@ package com.nj.invoicing.activity.engine;
 
 import com.nj.invoicing.TestImpl.LegImpl;
 import com.nj.invoicing.TestImpl.ProgramImpl;
+import com.nj.invoicing.TestImpl.ContractImpl;
 import com.nj.invoicing.activity.ChargeTypeEnum;
 import com.nj.invoicing.activity.LegCharge;
 import java.math.BigDecimal;
@@ -62,5 +63,23 @@ public class ActivityInvoiceEngineTest
         assertEquals("Expecting rate of 7.2", prog.dsf, charge.rate);
         assertEquals("Expecting quantity of 0", leg.numberOfPax, charge.quantity);
         assertEquals("Total ", prog.dsf.multiply(leg.numberOfPax), charge.getTotal());
+    }
+
+    @Test
+    public void testCalculateRegularHourlyRate()
+    {
+        ContractImpl contract = new ContractImpl();
+        contract.hourlyRate = new BigDecimal(5000.00);
+
+        LegImpl leg = new LegImpl();
+        leg.hoursFlown = new BigDecimal(1.6);
+
+        LegCharge charge = engine.calculateRegularHourlyRate(contract, leg);
+        assertNotNull(charge);
+        assertNull(charge.fet);
+        assertEquals("Expecting charge type of RegularHourlyRAte", charge.type, ChargeTypeEnum.RegularHourlyRate);
+        assertEquals("Expecting rate of 5000.00", contract.hourlyRate, charge.rate);
+        assertEquals("Expecting quantity of 1.6", leg.hoursFlown, charge.quantity);
+        assertEquals("Total ", contract.hourlyRate.multiply(leg.hoursFlown), charge.getTotal());
     }
 }

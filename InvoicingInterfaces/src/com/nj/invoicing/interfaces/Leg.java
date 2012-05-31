@@ -13,4 +13,5 @@ import java.math.BigDecimal;
 public interface Leg
 {
     public BigDecimal getNumberOfPassengers();
+    public BigDecimal getHoursFlown();
 }

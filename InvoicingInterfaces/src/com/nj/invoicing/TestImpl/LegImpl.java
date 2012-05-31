@@ -14,10 +14,17 @@ import java.math.BigDecimal;
 public class LegImpl implements Leg
 {
     public BigDecimal numberOfPax = null;
+    public BigDecimal hoursFlown = null;
 
     @Override
     public BigDecimal getNumberOfPassengers()
     {
         return numberOfPax;
+    }
+
+    @Override
+    public BigDecimal getHoursFlown()
+    {
+        return hoursFlown;
     }
 }
