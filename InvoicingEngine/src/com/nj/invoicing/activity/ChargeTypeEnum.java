@@ -11,7 +11,8 @@ package com.nj.invoicing.activity;
 public enum ChargeTypeEnum
 {
     None(0),
-    DomesticSegmentFee(10);
+    DomesticSegmentFee(10),
+    RegularHourlyRate(2);
 
     public final int code;
 

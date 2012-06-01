@@ -8,6 +8,7 @@ import com.nj.invoicing.activity.ChargeTypeEnum;
 import com.nj.invoicing.activity.LegCharge;
 import com.nj.invoicing.interfaces.Leg;
 import com.nj.invoicing.interfaces.Program;
+import com.nj.invoicing.interfaces.Contract;
 
 /**
  *
@@ -24,6 +25,19 @@ public class ActivityInvoiceEngine
             charge.rate = program.getDomesticSegmentFee();
             charge.quantity = leg.getNumberOfPassengers();
             charge.type = ChargeTypeEnum.DomesticSegmentFee;
+        }
+        return charge;
+    }
+    
+    public LegCharge calculateRegularHourlyRate(Contract contract, Leg leg)
+    {
+        LegCharge charge = null;
+        if (contract != null && leg != null)
+        {
+            charge = new LegCharge();
+            charge.rate = contract.getHourlyRate();
+            charge.quantity = leg.getHoursFlown();
+            charge.type = ChargeTypeEnum.RegularHourlyRate;
         }
         return charge;
     }
