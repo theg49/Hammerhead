@@ -4,6 +4,8 @@
  */
 package com.nj.invoicing.monthly;
 
+import com.nj.invoicing.enums.FetEnum;
+import com.nj.invoicing.enums.MonthlyRateEnum;
 import java.math.BigDecimal;
 
 /**
@@ -15,6 +17,7 @@ public class MonthlyCharge
     public BigDecimal rate = null;
     public BigDecimal quantity = null;
     public MonthlyRateEnum type = MonthlyRateEnum.None;
+    public FetEnum taxable = FetEnum.None;
     public BigDecimal fet = null;
     public String calculationText = null;
 

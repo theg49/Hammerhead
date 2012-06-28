@@ -4,9 +4,16 @@
  */
 package com.nj.invoicing.monthly.engine;
 
+import com.nj.invoicing.TestImpl.ContractImpl;
+import com.nj.invoicing.TestImpl.MonthlyRateImpl;
+import com.nj.invoicing.enums.FetEnum;
+import com.nj.invoicing.enums.MonthlyRateEnum;
 import com.nj.invoicing.interfaces.Contract;
-import java.util.Date;
-import java.util.List;
+import com.nj.invoicing.interfaces.MonthlyRate;
+import com.nj.invoicing.monthly.MonthlyCharge;
+import com.nj.invoicing.util.DateUtil;
+import java.math.BigDecimal;
+import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -40,6 +47,21 @@ public class MonthlyInvoiceEngineTest
     {
     }
 
+    public void assertBigDecimal(int i, BigDecimal dec)
+    {
+        assertEquals(i, dec.intValue());
+    }
+
+    public void assertBigDecimal(double i, BigDecimal dec)
+    {
+        assertEquals(i, dec.doubleValue());
+    }
+
+    public GregorianCalendar getDate(int year, int month, int day)
+    {
+        return DateUtil.createDate(year, month, day);
+    }
+
     /**
      * Test of determineApplicableMonthlyRates method, of class MonthlyInvoiceEngine.
      */
@@ -47,14 +69,22 @@ public class MonthlyInvoiceEngineTest
     public void testDetermineApplicableMonthlyRates()
     {
         System.out.println("determineApplicableMonthlyRates");
-        Date billingMonth = null;
-        Contract contract = null;
+        GregorianCalendar billingMonth = getDate(2012, 6, 1);
+        ContractImpl contract = new ContractImpl();
+        contract.monthlyRates = new ArrayList<MonthlyRate>(1);
+        contract.monthlyRates.add(new MonthlyRateImpl(new BigDecimal(1000.00),
+                getDate(2011, 6, 1), null, MonthlyRateEnum.MonthlyManagementFee, FetEnum.Default));
+
         MonthlyInvoiceEngine instance = new MonthlyInvoiceEngine();
-        List expResult = null;
-        List result = instance.determineApplicableMonthlyRates(billingMonth,
-                contract);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<MonthlyCharge> result = instance.determineApplicableMonthlyRates(billingMonth, contract);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        MonthlyCharge charge = result.get(0);
+        assertEquals(null, charge.fet);
+        assertBigDecimal(1, charge.quantity);
+        assertBigDecimal(1000, charge.rate);
+        assertEquals(FetEnum.Default, charge.taxable);
+        assertBigDecimal(1000, charge.getTotal());
     }
 }

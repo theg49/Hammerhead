@@ -4,6 +4,7 @@
  */
 package com.nj.invoicing.activity;
 
+import com.nj.invoicing.enums.ChargeTypeEnum;
 import java.math.BigDecimal;
 
 /**

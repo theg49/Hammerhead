@@ -7,7 +7,7 @@ package com.nj.invoicing.activity.engine;
 import com.nj.invoicing.TestImpl.LegImpl;
 import com.nj.invoicing.TestImpl.ProgramImpl;
 import com.nj.invoicing.TestImpl.ContractImpl;
-import com.nj.invoicing.activity.ChargeTypeEnum;
+import com.nj.invoicing.enums.ChargeTypeEnum;
 import com.nj.invoicing.activity.LegCharge;
 import java.math.BigDecimal;
 import org.junit.*;

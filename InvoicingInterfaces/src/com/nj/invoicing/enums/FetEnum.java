@@ -2,21 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nj.invoicing.activity;
+package com.nj.invoicing.enums;
 
 /**
  *
  * @author TheG49
  */
-public enum ChargeTypeEnum
+public enum FetEnum
 {
     None(0),
-    RegularHourlyRate(1),
-    DomesticSegmentFee(10);
+    Yes(1),
+    No(2),
+    Default(3);
 
     public final int code;
 
-    ChargeTypeEnum(int codeIn)
+    FetEnum(int codeIn)
     {
         code = codeIn;
     }

@@ -4,7 +4,7 @@
  */
 package com.nj.invoicing.activity.engine;
 
-import com.nj.invoicing.activity.ChargeTypeEnum;
+import com.nj.invoicing.enums.ChargeTypeEnum;
 import com.nj.invoicing.activity.LegCharge;
 import com.nj.invoicing.interfaces.Leg;
 import com.nj.invoicing.interfaces.Program;
@@ -28,7 +28,7 @@ public class ActivityInvoiceEngine
         }
         return charge;
     }
-    
+
     public LegCharge calculateRegularHourlyRate(Contract contract, Leg leg)
     {
         LegCharge charge = null;
